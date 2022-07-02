@@ -1,0 +1,40 @@
+.container h1 {
+    text-align: center!important;
+}
+
+.card {
+    border-radius: 12px!important;
+    box-shadow: 4px 5px 6px rgb(128, 120, 120);
+}
+
+#notes {
+    display: flex!important;
+    /* flex-direction: column; */
+    justify-content: space-evenly!important;
+    align-items: center!important;
+}
+
+.inner_notes {
+    width: 30%;
+    border: 1px solid blue;
+    padding: 1rem;
+    margin: 14px 0px;
+    border-radius: 14px;
+    flex-wrap: wrap;
+}
+
+@media (min-width:500px) and (max-width:800px) {
+    .inner_notes {
+        width: 40%;
+    }
+}
+
+@media(max-width:500px) {
+    #notes {
+        justify-content: center;
+        align-items: center!important;
+    }
+    .inner_notes {
+        width: 80%;
+    }
+}

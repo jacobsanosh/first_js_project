@@ -14,10 +14,18 @@ submit.addEventListener('click', (e) => {
     } else {
         notesObj = JSON.parse(notes)
     }
-    notesObj.push(add_notes.value)
+    //creating an object to store both title and note
+    let title = document.getElementById('title')
+    let obj = {
+            title: title.value,
+            note: add_notes.value
+        }
+        // console.log(typeof(obj))
+    notesObj.push(obj)
     localStorage.setItem('notes', JSON.stringify(notesObj))
         // console.log(localStorage.getItem('notes'))
     add_notes.value = ""
+    title.value = ""
     show_notes();
 })
 
@@ -33,8 +41,10 @@ function show_notes() {
         // console.log(element, index)
         html += `<div class="inner_notes">
         <h4>${index+1}</h4>
-        <p>${element}</p>
-        <button type="button" id=${index} class="btn btn-danger" onclick="deleteNote(this.id)">Danger</button>
+        <p>title:${element.title}</p>
+        <hr>
+        <p>${element.note}</p>
+        <button type="button" id=${index} class="btn btn-danger" onclick="deleteNote(this.id)">Delete</button>
     </div>`
     });
     let note_div = document.getElementById("notes");
@@ -70,7 +80,8 @@ search.addEventListener('input', () => {
     Array.from(notes).forEach((ele) => {
         let carText = ele.getElementsByTagName("p")[0].innerText;
         console.log(carText)
-        if (carText.includes(inputVal)) {
+        let title = ele.getElementsByTagName("p")[1].innerText;
+        if (carText.includes(inputVal) || title.includes(inputVal)) {
             // console.log("ented")
             ele.style.display = "block";
         } else {
